@@ -1,10 +1,11 @@
-use psl::{List, Psl};
+use addr::parser::DomainName;
+use psl::List;
 use std::str;
 use std::time::Instant;
 
 fn run(domain: &str, expected: &str) {
-    let root = List.domain(domain.as_bytes()).unwrap();
-    assert_eq!(root, expected);
+    let domain = List.parse_domain_name(domain).unwrap();
+    assert_eq!(domain.root().unwrap(), expected);
 }
 
 fn main() {
